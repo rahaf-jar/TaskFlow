@@ -38,3 +38,13 @@ VALUES
 ('Starter', 29.00, 5, FALSE),
 ('Professional', 99.00, 50, TRUE),
 ('Enterprise', 299.00, 500, TRUE);
+
+
+INSERT INTO Subscriptions
+(customer_id, plan_id, subscription_status, start_date, end_date)
+VALUES
+(1, 3, 'Active', '2025-01-15', NULL),
+(2, 2, 'Active', '2025-02-20', NULL),
+(3, 2, 'Trial', '2025-03-10', NULL),
+(4, 1, 'Trial', '2025-04-05', NULL),
+(5, 1, 'Cancelled', '2025-05-01', '2025-08-01');
