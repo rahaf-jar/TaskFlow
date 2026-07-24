@@ -34,3 +34,12 @@ CREATE TABLE Customers (
     subscription_start_date DATE,
     customer_status VARCHAR(50)
 );
+
+
+CREATE TABLE SubscriptionPlans (
+    plan_id INT AUTO_INCREMENT PRIMARY KEY,
+    plan_name VARCHAR(100) NOT NULL,
+    monthly_price DECIMAL(10,2) NOT NULL,
+    max_users INT,
+    ai_features BOOLEAN DEFAULT FALSE
+);
