@@ -62,3 +62,12 @@ CREATE TABLE Features (
     feature_name VARCHAR(100) NOT NULL,
     description VARCHAR(255)
 );
+
+
+CREATE TABLE PlanFeatures (
+    plan_id INT,
+    feature_id INT,
+    PRIMARY KEY (plan_id, feature_id),
+    FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id),
+    FOREIGN KEY (feature_id) REFERENCES Features(feature_id)
+);
