@@ -30,3 +30,11 @@ VALUES
 ('Adidas', 'Retail', 'Julia Fischer', 'julia.fischer@adidas.com', 'Germany', '2025-03-10', 'Active'),
 ('Zalando', 'E-Commerce', 'Markus Klein', 'markus.klein@zalando.com', 'Germany', '2025-04-05', 'Trial'),
 ('Spotify', 'Entertainment', 'Anna Berg', 'anna.berg@spotify.com', 'Sweden', '2025-05-01', 'Churned');
+
+
+INSERT INTO SubscriptionPlans
+(plan_name, monthly_price, max_users, ai_features)
+VALUES
+('Starter', 29.00, 5, FALSE),
+('Professional', 99.00, 50, TRUE),
+('Enterprise', 299.00, 500, TRUE);
