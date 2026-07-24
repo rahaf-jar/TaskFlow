@@ -20,3 +20,13 @@ VALUES
 ('Emma', 'Davis', '1999-08-30', 'Marketing Specialist', 4, 55000.00, '2025-01-05'),
 ('Sophia', 'Taylor', '1996-12-10', 'HR Specialist', 6, 60000.00, '2024-04-12'),
 ('Liam', 'Anderson', '1994-05-22', 'Customer Success Manager', 5, 70000.00, '2024-02-20');
+
+
+INSERT INTO Customers
+(company_name, industry, contact_person, email, country, subscription_start_date, customer_status)
+VALUES
+('BMW Group', 'Automotive', 'Laura Schmidt', 'laura.schmidt@bmw.com', 'Germany', '2025-01-15', 'Active'),
+('Siemens AG', 'Technology', 'Thomas Weber', 'thomas.weber@siemens.com', 'Germany', '2025-02-20', 'Active'),
+('Adidas', 'Retail', 'Julia Fischer', 'julia.fischer@adidas.com', 'Germany', '2025-03-10', 'Active'),
+('Zalando', 'E-Commerce', 'Markus Klein', 'markus.klein@zalando.com', 'Germany', '2025-04-05', 'Trial'),
+('Spotify', 'Entertainment', 'Anna Berg', 'anna.berg@spotify.com', 'Sweden', '2025-05-01', 'Churned');
