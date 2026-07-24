@@ -48,3 +48,13 @@ VALUES
 (3, 2, 'Trial', '2025-03-10', NULL),
 (4, 1, 'Trial', '2025-04-05', NULL),
 (5, 1, 'Cancelled', '2025-05-01', '2025-08-01');
+
+
+INSERT INTO Features
+(feature_name, description)
+VALUES
+('Task Management', 'Create, assign, and manage tasks'),
+('AI Assistant', 'AI powered productivity support'),
+('Analytics Dashboard', 'Business performance reports and insights'),
+('Calendar Integration', 'Connect tasks with calendars'),
+('Time Tracking', 'Track working hours and productivity');
