@@ -74,3 +74,13 @@ VALUES
 (3,3),
 (3,4),
 (3,5);
+
+
+INSERT INTO Sales
+(employee_id, customer_id, plan_id, sale_amount, sale_status, sale_date)
+VALUES
+(1,1,3,299.00,'Won','2026-01-15'),
+(2,2,2,99.00,'Won','2026-02-20'),
+(3,3,2,99.00,'Pending','2026-03-10'),
+(4,4,1,29.00,'Won','2026-04-05'),
+(5,5,1,29.00,'Lost','2026-05-01');
