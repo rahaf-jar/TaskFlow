@@ -2,221 +2,355 @@
 
 ## Company Overview
 
-TaskFlow is a SaaS productivity management platform that helps companies organize their teams, manage projects, and improve workplace collaboration.
+TaskFlow is a SaaS productivity management platform that helps businesses organize projects, manage tasks, collaborate with teams, and improve productivity.
 
-TaskFlow offers different subscription plans with different features. The database manages internal employees, customers, sales activity, product features, subscriptions, and customer usage analytics.
+The platform offers multiple subscription plans with different features, allowing companies of different sizes to choose the solution that best fits their needs.
 
-## Database Goals
+This database was designed to support both business operations and product analytics by storing information about employees, customers, subscriptions, product features, sales, and platform usage.
 
-The database should help TaskFlow answer business questions such as:
+---
 
-- Which employees generate the most revenue?
-- Which customers generate the highest value?
+# Database Goals
+
+The database should help TaskFlow answer important business questions such as:
+
+- Which employees generate the highest revenue?
+- Which departments perform best?
 - Which subscription plan is the most popular?
-- Which features are included in each plan?
-- How do customers use the platform?
+- Which customers generate the highest lifetime value?
+- Which product features are available in each subscription plan?
+- How actively do customers use the platform?
+- Which industries purchase TaskFlow most frequently?
 
+---
+
+# Entity Relationship Overview
+
+```
+Departments
+      │
+      │
+Employees ───────────────┐
+                          │
+                          ▼
+                        Sales
+                       ▲     ▲
+                       │     │
+                 Customers   SubscriptionPlans
+                      │              │
+                      ▼              ▼
+               ProductUsage    PlanFeatures
+                                      │
+                                      ▼
+                                  Features
+```
+
+---
 
 # Database Tables
 
 ---
 
-# 1. Employees
+# 1. Departments
 
-## Purpose
+## Business Purpose
 
-Stores information about TaskFlow employees.
+Stores the departments within TaskFlow.
 
-This table helps analyze employee performance, departments, salaries, and sales activities.
+Separating departments into their own table reduces duplicate data and creates a normalized database structure.
+
+## Primary Key
+
+- department_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| employee_id | INT | Unique identifier for each employee |
-| first_name | VARCHAR | Employee first name |
-| last_name | VARCHAR | Employee last name |
-| job_title | VARCHAR | Employee position |
-| department | VARCHAR | Employee department |
-| salary | DECIMAL | Annual employee salary |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| department_id | INT | Unique department identifier |
+| department_name | VARCHAR | Department name |
+| manager_name | VARCHAR | Department manager |
+
+## Relationships
+
+- One department has many employees.
+
+## Business Questions
+
+- How many employees work in each department?
+- Which department has the highest payroll?
+- Which department generates the most sales?
+
+---
+
+# 2. Employees
+
+## Business Purpose
+
+Stores information about every employee working at TaskFlow.
+
+Employees can belong to different departments and sales employees can close customer deals.
+
+## Primary Key
+
+- employee_id
+
+## Foreign Keys
+
+- department_id → Departments.department_id
+
+## Columns
+
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| employee_id | INT | Unique employee identifier |
+| first_name | VARCHAR | First name |
+| last_name | VARCHAR | Last name |
 | date_of_birth | DATE | Employee date of birth |
-| hire_date | DATE | Date employee joined TaskFlow |
+| job_title | VARCHAR | Employee job title |
+| department_id | INT | Employee department |
+| salary | DECIMAL | Annual salary |
+| hire_date | DATE | Hiring date |
 
 ## Relationships
 
-- One employee can create multiple deals.
+- Many employees belong to one department.
+- One employee can create many sales.
 
+## Business Questions
+
+- What is the average salary by department?
+- Who is the oldest employee?
+- Who generates the highest sales revenue?
+- How many employees were hired this year?
 
 ---
 
-# 2. Customers
+# 3. Customers
 
-## Purpose
+## Business Purpose
 
-Stores information about companies using TaskFlow.
+Stores companies that subscribe to TaskFlow.
 
-Customers are businesses that purchase TaskFlow subscription plans.
+Each customer represents one business using the platform.
+
+## Primary Key
+
+- customer_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| customer_id | INT | Unique identifier for each customer |
-| company_name | VARCHAR | Customer company name |
-| industry | VARCHAR | Business industry |
-| country | VARCHAR | Customer country |
-| company_size | VARCHAR | Number of employees category |
-| created_date | DATE | Date customer joined TaskFlow |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| customer_id | INT | Unique customer identifier |
+| company_name | VARCHAR | Company name |
+| industry | VARCHAR | Industry |
+| country | VARCHAR | Country |
+| company_size | VARCHAR | Company size |
+| created_date | DATE | Customer registration date |
 
 ## Relationships
 
-- One customer can have multiple deals.
-- One customer can have multiple usage records.
+- One customer can have many sales.
+- One customer can have many product usage records.
 
+## Business Questions
+
+- Which industries buy TaskFlow most often?
+- Which countries generate the most revenue?
+- Which customers joined this month?
 
 ---
 
-# 3. Subscription Plans
+# 4. SubscriptionPlans
 
-## Purpose
+## Business Purpose
 
-Stores available TaskFlow pricing plans.
+Stores all available subscription plans.
 
-Different plans provide different features.
+Each plan offers different pricing and features.
+
+## Primary Key
+
+- plan_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| plan_id | INT | Unique identifier for each plan |
-| plan_name | VARCHAR | Name of subscription plan |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| plan_id | INT | Unique plan identifier |
+| plan_name | VARCHAR | Plan name |
 | monthly_price | DECIMAL | Monthly subscription price |
-| max_users | INT | Maximum users allowed |
+| max_users | INT | Maximum allowed users |
 | description | VARCHAR | Plan description |
 
 ## Relationships
 
-- One subscription plan can have multiple customers.
-- One subscription plan can contain multiple features.
+- One plan can be purchased many times.
+- One plan contains multiple features.
 
+## Business Questions
 
----
-
-# 4. Deals
-
-## Purpose
-
-Stores sales transactions between TaskFlow employees and customers.
-
-## Columns
-
-| Column Name | Data Type | Description |
-|---|---|---|
-| deal_id | INT | Unique identifier for each deal |
-| employee_id | INT | Employee responsible for deal |
-| customer_id | INT | Customer purchasing the product |
-| plan_id | INT | Purchased subscription plan |
-| deal_value | DECIMAL | Revenue generated |
-| deal_status | VARCHAR | Deal status |
-| deal_date | DATE | Date deal was created |
-
-## Relationships
-
-- Many deals belong to one employee.
-- Many deals belong to one customer.
-- Many deals belong to one subscription plan.
-
+- Which plan is the most popular?
+- Which plan generates the most revenue?
 
 ---
 
 # 5. Features
 
-## Purpose
+## Business Purpose
 
-Stores product features available in TaskFlow.
+Stores all features available inside TaskFlow.
 
-Examples:
-- AI Assistant
-- Task Management
-- Reports
-- Automation
+Examples include AI Assistant, Reports, Calendar, and Task Management.
+
+## Primary Key
+
+- feature_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| feature_id | INT | Unique identifier |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| feature_id | INT | Unique feature identifier |
 | feature_name | VARCHAR | Feature name |
-| description | VARCHAR | Feature explanation |
+| description | VARCHAR | Feature description |
 
 ## Relationships
 
-- Features can belong to multiple subscription plans.
+- One feature can belong to many subscription plans.
 
+## Business Questions
+
+- Which features are included in each subscription plan?
 
 ---
 
-# 6. Plan Features
+# 6. PlanFeatures
 
-## Purpose
+## Business Purpose
 
-Connects subscription plans with their available features.
+Creates the many-to-many relationship between subscription plans and product features.
 
-This table manages the many-to-many relationship between plans and features.
+## Composite Primary Key
+
+- plan_id
+- feature_id
+
+## Foreign Keys
+
+- plan_id → SubscriptionPlans.plan_id
+- feature_id → Features.feature_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| plan_id | INT | Subscription plan identifier |
-| feature_id | INT | Feature identifier |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| plan_id | INT | Subscription plan |
+| feature_id | INT | Product feature |
 
 ## Relationships
 
-- One plan can have many features.
-- One feature can belong to many plans.
+- Many features belong to many plans.
 
+## Business Questions
+
+- Which features belong to each plan?
+- Which plans include AI Assistant?
 
 ---
 
-# 7. Usage Analytics
+# 7. Sales
 
-## Purpose
+## Business Purpose
 
-Tracks how customers use the TaskFlow platform.
+Stores every subscription purchase made by customers.
 
-This helps the product team understand user behavior.
+Each sale connects an employee, a customer, and a subscription plan.
+
+## Primary Key
+
+- sale_id
+
+## Foreign Keys
+
+- employee_id → Employees.employee_id
+- customer_id → Customers.customer_id
+- plan_id → SubscriptionPlans.plan_id
 
 ## Columns
 
-| Column Name | Data Type | Description |
-|---|---|---|
-| usage_id | INT | Unique identifier |
-| customer_id | INT | Customer identifier |
-| month | DATE | Usage month |
-| tasks_created | INT | Number of tasks created |
-| active_users | INT | Number of active users |
-| ai_requests | INT | Number of AI feature requests |
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| sale_id | INT | Unique sale identifier |
+| employee_id | INT | Sales employee |
+| customer_id | INT | Purchasing customer |
+| plan_id | INT | Purchased plan |
+| sale_amount | DECIMAL | Revenue generated |
+| sale_status | VARCHAR | Sale status |
+| sale_date | DATE | Sale date |
 
 ## Relationships
 
-- One customer can have multiple usage records.
+- Many sales belong to one employee.
+- Many sales belong to one customer.
+- Many sales belong to one subscription plan.
 
+## Business Questions
+
+- Who generated the highest revenue?
+- What is the monthly revenue?
+- Which customers spend the most?
 
 ---
 
-# Database Relationships Overview
+# 8. ProductUsage
 
-```
-Employees
-       |
-       |
-     Deals
-  /         \
-Customers SubscriptionPlans
-    |          |
-    |          |
- Usage     PlanFeatures
-                |
-            Features
-```
+## Business Purpose
+
+Tracks how customers use TaskFlow after purchasing a subscription.
+
+This information helps the Product Team understand customer engagement.
+
+## Primary Key
+
+- usage_id
+
+## Foreign Keys
+
+- customer_id → Customers.customer_id
+
+## Columns
+
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| usage_id | INT | Unique usage record |
+| customer_id | INT | Customer |
+| usage_month | DATE | Reporting month |
+| tasks_created | INT | Number of created tasks |
+| active_users | INT | Active users |
+| ai_requests | INT | Number of AI requests |
+
+## Relationships
+
+- Many usage records belong to one customer.
+
+## Business Questions
+
+- Which customers actively use TaskFlow?
+- Which customers rarely log in?
+- How popular is the AI feature?
+- Which customers create the most tasks?
+
+---
+
+# Summary
+
+This database follows relational database design principles by:
+
+- Using Primary Keys to uniquely identify records.
+- Using Foreign Keys to create relationships between tables.
+- Separating related information into different tables to reduce duplicate data.
+- Supporting CRM, Product Management, Sales Analytics, and Business Intelligence use cases.
+
+The design provides a strong foundation for writing SQL queries, generating business reports, and analyzing customer behavior within the TaskFlow platform.
