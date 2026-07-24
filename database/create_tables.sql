@@ -55,3 +55,10 @@ CREATE TABLE Subscriptions (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
     FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id)
 );
+
+
+CREATE TABLE Features (
+    feature_id INT AUTO_INCREMENT PRIMARY KEY,
+    feature_name VARCHAR(100) NOT NULL,
+    description VARCHAR(255)
+);
