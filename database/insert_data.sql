@@ -58,3 +58,19 @@ VALUES
 ('Analytics Dashboard', 'Business performance reports and insights'),
 ('Calendar Integration', 'Connect tasks with calendars'),
 ('Time Tracking', 'Track working hours and productivity');
+
+
+INSERT INTO PlanFeatures
+(plan_id, feature_id)
+VALUES
+(1,1),
+(1,4),
+(2,1),
+(2,2),
+(2,3),
+(2,4),
+(3,1),
+(3,2),
+(3,3),
+(3,4),
+(3,5);
