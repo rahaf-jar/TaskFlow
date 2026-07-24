@@ -85,3 +85,16 @@ CREATE TABLE Sales (
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
     FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id)
 );
+
+
+CREATE TABLE ProductUsage (
+    usage_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT,
+    feature_id INT,
+    usage_month DATE,
+    tasks_created INT,
+    active_users INT,
+    ai_requests INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (feature_id) REFERENCES Features(feature_id)
+);
