@@ -43,6 +43,14 @@ Employees ───────────────┐
                                       │
                                       ▼
                                   Features
+                      
+Customers
+      │
+      ▼
+Subscriptions
+      │
+      ▼
+SubscriptionPlans
 ```
 
 ---
@@ -153,6 +161,7 @@ Each customer represents one business using the platform.
 
 - One customer can have many sales.
 - One customer can have many product usage records.
+- One customer can have many subscriptions.
 
 ## Business Questions
 
@@ -182,12 +191,13 @@ Each plan offers different pricing and features.
 | plan_name | VARCHAR | Plan name |
 | monthly_price | DECIMAL | Monthly subscription price |
 | max_users | INT | Maximum allowed users |
-| description | VARCHAR | Plan description |
+| ai_features | BOOLEAN | Indicates whether AI features are included |
 
 ## Relationships
 
 - One plan can be purchased many times.
 - One plan contains multiple features.
+- One plan can have many subscriptions.
 
 ## Business Questions
 
@@ -196,7 +206,49 @@ Each plan offers different pricing and features.
 
 ---
 
-# 5. Features
+# 5. Subscriptions
+
+## Business Purpose
+
+Stores customer subscription records.
+
+This table connects customers with their selected subscription plans and tracks the subscription lifecycle.
+
+## Primary Key
+
+- subscription_id
+
+## Foreign Keys
+
+- customer_id → Customers.customer_id
+- plan_id → SubscriptionPlans.plan_id
+
+## Columns
+
+| Column | Data Type | Description |
+|----------|-----------|-------------|
+| subscription_id | INT | Unique subscription identifier |
+| customer_id | INT | Customer using the subscription |
+| plan_id | INT | Selected subscription plan |
+| subscription_status | VARCHAR | Subscription status (Trial, Active, Cancelled, Expired) |
+| start_date | DATE | Subscription start date |
+| end_date | DATE | Subscription end date |
+
+## Relationships
+
+- Many subscriptions belong to one customer.
+- Many subscriptions belong to one subscription plan.
+
+## Business Questions
+
+- How many customers are currently in trial?
+- How many active subscriptions exist?
+- Which plans have the highest retention?
+- Which customers cancelled their subscriptions?
+
+---
+
+# 6. Features
 
 ## Business Purpose
 
@@ -226,7 +278,7 @@ Examples include AI Assistant, Reports, Calendar, and Task Management.
 
 ---
 
-# 6. PlanFeatures
+# 7. PlanFeatures
 
 ## Business Purpose
 
@@ -260,7 +312,7 @@ Creates the many-to-many relationship between subscription plans and product fea
 
 ---
 
-# 7. Sales
+# 8. Sales
 
 ## Business Purpose
 
@@ -304,7 +356,7 @@ Each sale connects an employee, a customer, and a subscription plan.
 
 ---
 
-# 8. ProductUsage
+# 9. ProductUsage
 
 ## Business Purpose
 
@@ -338,7 +390,7 @@ This information helps the Product Team understand customer engagement.
 ## Business Questions
 
 - Which customers actively use TaskFlow?
-- Which customers rarely log in?
+- Which customers rarely use the platform?
 - How popular is the AI feature?
 - Which customers create the most tasks?
 
