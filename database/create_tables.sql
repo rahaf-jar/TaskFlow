@@ -71,3 +71,17 @@ CREATE TABLE PlanFeatures (
     FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id),
     FOREIGN KEY (feature_id) REFERENCES Features(feature_id)
 );
+
+
+CREATE TABLE Sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT,
+    customer_id INT,
+    plan_id INT,
+    sale_amount DECIMAL(10,2),
+    sale_status VARCHAR(50),
+    sale_date DATE,
+    FOREIGN KEY (employee_id) REFERENCES Employees(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id)
+);
