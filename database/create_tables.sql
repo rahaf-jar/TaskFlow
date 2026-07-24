@@ -43,3 +43,15 @@ CREATE TABLE SubscriptionPlans (
     max_users INT,
     ai_features BOOLEAN DEFAULT FALSE
 );
+
+
+CREATE TABLE Subscriptions (
+    subscription_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    plan_id INT NOT NULL,
+    subscription_status VARCHAR(50) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (plan_id) REFERENCES SubscriptionPlans(plan_id)
+);
