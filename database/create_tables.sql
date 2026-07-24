@@ -22,3 +22,15 @@ CREATE TABLE Employees (
     hire_date DATE NOT NULL,
     FOREIGN KEY (department_id) REFERENCES Departments(department_id)
 );
+
+
+CREATE TABLE Customers (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    company_name VARCHAR(150) NOT NULL,
+    industry VARCHAR(100),
+    contact_person VARCHAR(100),
+    email VARCHAR(150),
+    country VARCHAR(100),
+    subscription_start_date DATE,
+    customer_status VARCHAR(50)
+);
