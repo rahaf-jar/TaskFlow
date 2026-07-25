@@ -29,7 +29,28 @@ VALUES
 ('Siemens AG', 'Technology', 'Thomas Weber', 'thomas.weber@siemens.com', 'Germany', '2025-02-20', 'Active'),
 ('Adidas', 'Retail', 'Julia Fischer', 'julia.fischer@adidas.com', 'Germany', '2025-03-10', 'Active'),
 ('Zalando', 'E-Commerce', 'Markus Klein', 'markus.klein@zalando.com', 'Germany', '2025-04-05', 'Trial'),
-('Spotify', 'Entertainment', 'Anna Berg', 'anna.berg@spotify.com', 'Sweden', '2025-05-01', 'Churned');
+('Spotify', 'Entertainment', 'Anna Berg', 'anna.berg@spotify.com', 'Sweden', '2025-05-01', 'Churned'),
+('Mercedes-Benz', 'Automotive', 'Michael Bauer', 'michael.bauer@mercedes.com', 'Germany', '2025-06-10', 'Active'),
+('Audi AG', 'Automotive', 'Sophie Wagner', 'sophie.wagner@audi.com', 'Germany', '2025-06-25', 'Active'),
+('Tesla', 'Automotive', 'James Wilson', 'james.wilson@tesla.com', 'USA', '2025-07-05', 'Trial'),
+
+('Roche', 'Healthcare', 'Emma Keller', 'emma.keller@roche.com', 'Switzerland', '2025-07-15', 'Active'),
+('Mayo Clinic', 'Healthcare', 'David Miller', 'david.miller@mayoclinic.com', 'USA', '2025-08-01', 'Active'),
+('Pfizer', 'Healthcare', 'Sarah Johnson', 'sarah.johnson@pfizer.com', 'USA', '2025-08-20', 'Churned'),
+
+('IKEA', 'Retail', 'Erik Svensson', 'erik.svensson@ikea.com', 'Sweden', '2025-09-01', 'Active'),
+('Zara', 'Retail', 'Maria Garcia', 'maria.garcia@zara.com', 'Spain', '2025-09-15', 'Active'),
+
+('Deutsche Bank', 'Finance', 'Hans Mueller', 'hans.mueller@db.com', 'Germany', '2025-10-01', 'Active'),
+('JPMorgan Chase', 'Finance', 'Emily Carter', 'emily.carter@jpmorgan.com', 'USA', '2025-10-15', 'Active'),
+('Revolut', 'Finance', 'Oliver Smith', 'oliver.smith@revolut.com', 'United Kingdom', '2025-11-01', 'Trial'),
+
+('SAP', 'Technology', 'Daniel Fischer', 'daniel.fischer@sap.com', 'Germany', '2025-11-15', 'Active'),
+('Microsoft', 'Technology', 'Rachel Adams', 'rachel.adams@microsoft.com', 'USA', '2025-12-01', 'Active'),
+('Atlassian', 'Technology', 'Jack Brown', 'jack.brown@atlassian.com', 'Australia', '2025-12-15', 'Trial'),
+
+('Shopify', 'E-Commerce', 'Olivia Martin', 'olivia.martin@shopify.com', 'Canada', '2026-01-05', 'Active'),
+('Netflix', 'Entertainment', 'Noah Anderson', 'noah.anderson@netflix.com', 'USA', '2026-01-20', 'Active');
 
 
 INSERT INTO SubscriptionPlans
